@@ -16,30 +16,37 @@
 Pad::Pad()
 {
     color_ = Constants::BLUE;
-    position_ = Vector2D(Constants::SCREEN_WIDTH / 2 - Constants::PAD_WIDTH / 2, 100);
+    position_ = Vector2D(Constants::SCREEN_WIDTH / 2 - Constants::PAD_WIDTH / 2, Constants::SCREEN_HEIGHT * 5 / 6);
     
     rectangle_.x = position_.getX();
     rectangle_.y = position_.getY();
     
     rectangle_.w = Constants::PAD_WIDTH;
     rectangle_.h = Constants::PAD_HEIGHT;
+    
+    movable_ = true;
 }
 
 void Pad::handle_events(SDL_Event& e)
 {
-    const Uint8* state = SDL_GetKeyboardState(NULL);
-    
     velocity_.setX(0);
     
-    if(state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_RIGHT])
-        velocity_.setX(-1);
+    if(movable_)
+    {
+        const Uint8* state = SDL_GetKeyboardState(NULL);
     
-    if(state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LEFT])
-        velocity_.setX(1);
+        if(state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_RIGHT])
+            velocity_.setX(-1);
+    
+        else if(state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LEFT])
+            velocity_.setX(1);
+    }
 }
 
 void Pad::update(int delta)
 {
+    //movable_ = true;
+    
     position_ += velocity_ * (Constants::PAD_SPEED * delta/1000);
     
     if(position_.getX() < 0)
@@ -50,4 +57,9 @@ void Pad::update(int delta)
     
     rectangle_.x = position_.getX();
     rectangle_.y = position_.getY();
+}
+
+void Pad::on_collision()
+{
+    //movable_ = false;
 }

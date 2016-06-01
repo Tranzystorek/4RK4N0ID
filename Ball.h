@@ -21,14 +21,20 @@ class Ball : public Object
 public:
     Ball();
     
-    void handle_events(SDL_Event &e) {}
+    void handle_events(SDL_Event &e);
     void update(int delta);
     
-    void on_collision();
+    void on_collision(Constants::CollisionType ct);
+    
+    void on_pad_collision(double dir);
+    
+    void reset(int x);
 
 private:
     
     Vector2D velocity_;
+    
+    bool launched_;
 };
 
 #endif /* BALL_H */

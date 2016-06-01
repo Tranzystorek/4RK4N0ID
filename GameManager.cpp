@@ -44,15 +44,19 @@ void GameManager::init()
 {
     SDL_Init(SDL_INIT_VIDEO);
     
+    TTF_Init();
+    
     game_window_ = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                     Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     
-    game_renderer_ = SDL_CreateRenderer(game_window_, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    game_renderer_ = SDL_CreateRenderer(game_window_, -1, SDL_RENDERER_ACCELERATED);
     
     
     ObjectManager::Instance(); //initialize ObjectManager
     
     running_ = true;
+    
+    paused_ = false;
 }
 
 void GameManager::handle_events()
@@ -61,19 +65,24 @@ void GameManager::handle_events()
     
     while(SDL_PollEvent(&e))
     {
-        if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+        if(e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) )
         {
             running_ = false;
             break;
         }
         
-        ObjectManager::Instance()->handle_events(e);
+        if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN)
+            paused_ = !paused_;
+        
+        if(!paused_)
+            ObjectManager::Instance()->handle_events(e);
     }
 }
 
 void GameManager::update(int delta)
 {
-    ObjectManager::Instance()->update(delta);
+    if(!paused_)
+        ObjectManager::Instance()->update(delta);
 }
 
 void GameManager::render()
@@ -92,6 +101,8 @@ void GameManager::cleanup()
     SDL_DestroyRenderer(game_renderer_);
     
     SDL_DestroyWindow(game_window_);
+    
+    TTF_Quit();
     
     SDL_Quit();
 }

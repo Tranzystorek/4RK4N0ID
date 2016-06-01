@@ -18,7 +18,7 @@ class Vector2D
 {
 public:
 
-    Vector2D(int xx = 0, int yy = 0) : x(xx), y(yy) {};
+    Vector2D(double xx = 0, double yy = 0) : x(xx), y(yy) {};
 
     Vector2D operator+(Vector2D v);
     Vector2D operator-(Vector2D v);

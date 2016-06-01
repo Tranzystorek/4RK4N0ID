@@ -12,6 +12,7 @@
  */
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
@@ -29,15 +30,20 @@ public:
     
     bool is_running() const;
     
+    void deal_damage();
+    
 private:
     GameManager();
     
     static GameManager* p_instance_;
     
     bool running_;
+    bool paused_;
     
     SDL_Window* game_window_;
     SDL_Renderer* game_renderer_;
+    
+    int lives_;
 };
 
 #endif /* GAMEMANAGER_H */

@@ -12,9 +12,13 @@
  */
 
 #include <SDL2/SDL.h>
+
 #include "Ball.h"
 #include "Pad.h"
-#include <vector>
+#include "Text.h"
+#include "BrickGenerator.h"
+
+#include <list>
 
 #ifndef OBJECTMANAGER_H
 #define OBJECTMANAGER_H
@@ -28,22 +32,35 @@ public:
     void update(int delta);
     void render(SDL_Renderer* renderer);
 
-    void add(Object* obj);
-
 private:
     ObjectManager();
     
-    void check_collisions();
+    void check_ball_brick_collision();
     
-    bool rect_collision(SDL_Rect a, SDL_Rect b);
+    Constants::CollisionType rect_collision(SDL_Rect a, SDL_Rect b);
+    
+    void check_ball_pad_collision();
 
     static ObjectManager* p_instance_;
+    
+    BrickGenerator brick_gen_;
 
-    std::vector<Object*> objects_;
+    std::list<Brick*> bricks_;
     
     Ball* ball_;
     
     Pad* pad_;
+    
+    Text* points_text_;
+    Text* lives_text_;
+    Text* win_text_;
+    Text* lose_text_;
+    
+    int lives_;
+    int points_;
+    
+    bool defeat_;
+    bool victory_;
 };
 
 #endif /* OBJECTMANAGER_H */

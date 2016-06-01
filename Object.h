@@ -22,8 +22,8 @@ class Object
 {
 public:
     
-    virtual void handle_events(SDL_Event& e) = 0;
-    virtual void update(int delta) = 0;
+    virtual void handle_events(SDL_Event& e) {};
+    virtual void update(int delta) {};
     virtual void render(SDL_Renderer* renderer);
     
 protected:

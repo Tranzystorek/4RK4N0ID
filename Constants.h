@@ -17,20 +17,41 @@
 namespace Constants
 {
     enum CollisionType {NONE, VERT, HOR};
+    
+    const int N_LIVES = 3;
 
     const int SCREEN_WIDTH = 1024;
     const int SCREEN_HEIGHT = 768;
     
-    const int BALL_WIDTH = 20;
-    const double BALL_SPEED = 300;
+    const int BALL_WIDTH = 15;
+    const double BALL_SPEED = 400;
     
-    const int PAD_WIDTH = 100;
+    const int PAD_WIDTH = 120;
     const int PAD_HEIGHT = 30;
     const double PAD_SPEED = 700;
     
+    const int BRICK_WIDTH = 70;
+    const int BRICK_HEIGHT = 22;
+    
+    const int N_ROWS = 5;
+    const int N_COLUMNS = 12;
+    
+    const int GAP_SIZE = 4;
+    
+    const int MATRIX_X = 70;
+    const int MATRIX_Y = 40;
+    
+    const int POINTS_PER_BRICK = 100;
+    
+    const int FONT_SIZE = 24;
+    
+    const SDL_Color TRANSPARENT = {255, 255, 255, 0};
     const SDL_Color BLACK = {0, 0, 0, 255};
-    const SDL_Color RED = {255, 0, 0, 255};
-    const SDL_Color BLUE = {0, 0, 255, 255};
+    const SDL_Color WHITE = {255, 255, 255, 255};
+    const SDL_Color RED =   {255, 0, 0, 255};
+    const SDL_Color BLUE =  {0, 0, 255, 255};
+    const SDL_Color GREEN = {0, 255, 0, 255};
+    const SDL_Color MELLOW = {0, 255, 255, 127};
 }
 
 #endif /* CONSTANTS_H */

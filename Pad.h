@@ -23,10 +23,16 @@ public:
     
     void handle_events(SDL_Event& e);
     void update(int delta);
+    
+    void on_collision();
+    
+    Vector2D get_velocity() const {return velocity_;}
 
 private:
     
     Vector2D velocity_;
+    
+    bool movable_;
 };
 
 #endif /* PAD_H */
