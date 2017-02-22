@@ -70,7 +70,7 @@ void ObjectManager::update(int delta)
     {
         ball_->reset(pad_->position_.getX() + Constants::PAD_WIDTH / 2 - Constants::BALL_WIDTH / 2);
         
-        lives_--;
+        lives_++;
     }
     
     pad_->update(delta);
