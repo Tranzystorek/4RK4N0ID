@@ -12,9 +12,8 @@
  */
 
 #include "ObjectManager.h"
-#include <cstddef> //for NULL
 
-ObjectManager* ObjectManager::p_instance_ = NULL;
+ObjectManager* ObjectManager::p_instance_ = nullptr;
 
 ObjectManager* ObjectManager::Instance()
 {
