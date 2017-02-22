@@ -16,11 +16,9 @@
 #include "Pad.h"
 #include "Ball.h"
 
-#include <cstddef> //for NULL
-
 const char* GAME_TITLE = "4RK4N0ID";
 
-GameManager* GameManager::p_instance_ = NULL;
+GameManager* GameManager::p_instance_ = nullptr;
 
 GameManager* GameManager::Instance()
 {
